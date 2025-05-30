@@ -9,6 +9,10 @@ logging.basicConfig(level=logging.INFO)
 def is_allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
 @app.route('/classify_file', methods=['POST'])
 def classify_file_route():
 
