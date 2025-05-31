@@ -140,7 +140,7 @@ To run the classifier locally, follow these steps:
 
 5.  **Run the Flask Application**:
     ```bash
-    python src/app.py
+    python -m src.app
     ```
     The application will start, typically on `http://127.0.0.1:5000`.
 
