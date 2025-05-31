@@ -1,7 +1,7 @@
 from io import BytesIO
 
 import pytest
-from src.app import app, allowed_file
+from src.app import app, is_allowed_file
 
 @pytest.fixture
 def client():
@@ -18,7 +18,7 @@ def client():
     ("file", False),
 ])
 def test_allowed_file(filename, expected):
-    assert allowed_file(filename) == expected
+    assert is_allowed_file(filename) == expected
 
 def test_no_file_in_request(client):
     response = client.post('/classify_file')
