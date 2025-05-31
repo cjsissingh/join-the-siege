@@ -1,5 +1,14 @@
 # Heron Coding Challenge - File Classifier
 
+## TL;DR 
+- Using a 3 step process:
+    1. Infer from the filename
+    2. Extract content and classify using Gemini API
+    3. Send the whole file to Gemini API
+
+- Deployed to Vercel. 
+- Test it: `curl -X POST -F 'file=@files/invoice_1.pdf' https://join-the-siege.vercel.app/classify_file`
+
 ## My Solution Overview
 
 To address the challenge of enhancing the initial file classifier, I've implemented a multi-layered solution that significantly improves its capabilities, particularly for handling poorly named files, adapting to new document types, and providing a more robust foundation for scaling.
@@ -78,12 +87,14 @@ While the current solution significantly improves upon the initial classifier, t
 
 ## Deployment (Vercel)
 
-I have deployed the application to Vercel. It is operational, but less efficient than running it locally. Vercel presented challenges primarily due to the Python dependencies that rely on underlying system binaries, such as:
+I have deployed the application to Vercel. It is operational (https://join-the-siege.vercel.app/classify_file), but less efficient than running it locally. Vercel presented challenges primarily due to the Python dependencies that rely on underlying system binaries, such as:
 
 *   **`pytesseract`**: Requires Tesseract OCR to be installed in the execution environment.
 *   **`python-magic`**: Relies on `libmagic` library.
 
 Vercel's serverless functions have a specific environment, and ensuring these binaries are correctly packaged and accessible can be complex. The build process on Vercel might not automatically include these system-level dependencies without further configuration (e.g., custom build scripts or by using pre-built layers/containers that include them). The text extraction functions may fail, which results in the application falling back to file-based classification. This will have a cost and API rate-limit implication.
+
+    Note: There is a rudimentatry rate-limit (10 requests per minute) on the API to prevent overwhelming of the Gemini API with my personal API key. I will likely pull this site down once my solution has been reviewed. I would prefer not to have a large bill.
 
 **With More Time, I Would Have:**
 
