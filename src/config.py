@@ -1,7 +1,7 @@
 import os
 
 PORT=5000
-LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = os.environ.get("LOG_LEVEL") or 'INFO'
 
 # Allowed file extensions for upload
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'}
